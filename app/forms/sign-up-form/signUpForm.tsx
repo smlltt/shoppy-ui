@@ -1,13 +1,14 @@
 "use client";
 
-import { Button, Stack, TextField, Link } from "@mui/material";
+import { Button, Stack, TextField, Link, capitalize } from "@mui/material";
 import NextLink from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { LoginFormData } from "../login-form/loginForm";
-import { z } from "zod";
+import { array, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpAction, State } from "./signUpAction";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { parseError } from "@/app/util/parseError";
 
 export const signUpSchema = z.object({
   email: z.string().email("Invalid email address").min(1, "Email is required"),
@@ -23,14 +24,12 @@ const SignUpForm = () => {
   );
   const {
     control,
-    handleSubmit,
     formState: { errors },
   } = useForm<SignupFormData>({ resolver: zodResolver(signUpSchema) });
 
-  const onSubmit = (data: SignupFormData) => console.log(data);
   return (
-    <form action={formAction}>
-      <Stack spacing={2} className="sm:w-[300px] ">
+    <form action={formAction} className="w-full max-w-sm">
+      <Stack spacing={2}>
         <Controller
           render={({ field }) => (
             <TextField
@@ -61,12 +60,20 @@ const SignUpForm = () => {
           name="password"
           control={control}
         />
-        <Button variant="contained" type="submit">
-          Sign up
-        </Button>
-        <Link component={NextLink} href={"/auth/login"} className="self-center">
-          Login
-        </Link>
+        {state?.error && parseError(state?.message)}
+
+        <div className="pt-1 flex flex-col gap-2">
+          <Button variant="contained" type="submit">
+            Sign up
+          </Button>
+          <Link
+            component={NextLink}
+            href={"/auth/login"}
+            className="self-center"
+          >
+            Login
+          </Link>
+        </div>
       </Stack>
     </form>
   );

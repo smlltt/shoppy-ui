@@ -1,16 +1,23 @@
 "use server";
 
+import { signUpEndpoint } from "@/app/endpoints";
+import { redirect } from "next/navigation";
+
 export type State = {
   status: string;
-  message: string;
+  message: string | string[];
   error?: string;
 } | null;
 
 export async function signUpAction(prevState: State | null, data: FormData) {
-  console.log("server action", data);
-
-  return {
-    status: "success",
-    message: `Welcome, ${data.get("email")} ${data.get("password")}!`,
-  };
+  const res = await fetch(signUpEndpoint, { method: "POST", body: data });
+  const parsedRes = await res.json();
+  if (!res.ok) {
+    return {
+      status: "error",
+      message: parsedRes.message,
+      error: parsedRes.error,
+    };
+  }
+  redirect("/");
 }
