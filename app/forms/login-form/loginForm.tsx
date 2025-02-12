@@ -27,8 +27,8 @@ const LoginForm = () => {
   });
   const onSubmit = (data: LoginFormData) => console.log(data);
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={2} className="sm:w-[300px] ">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
+      <Stack spacing={2}>
         <Controller
           render={({ field }) => (
             <TextField
