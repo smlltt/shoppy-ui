@@ -6,6 +6,10 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { z } from "zod";
+import { useActionState } from "react";
+import { ActionState } from "../models";
+import { loginAction } from "./loginAction";
+import { parseError } from "@/app/util/parseError";
 
 export const loginSchema = z.object({
   email: z.string().email("Invalid email address").min(1, "Email is required"),
@@ -18,16 +22,19 @@ export interface LoginFormData {
 }
 
 const LoginForm = () => {
+  const [state, formAction] = useActionState<ActionState, FormData>(
+    loginAction,
+    null
+  );
   const {
     control,
-    handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
-  const onSubmit = (data: LoginFormData) => console.log(data);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
+    <form action={formAction} className="w-full max-w-sm">
       <Stack spacing={2}>
         <Controller
           render={({ field }) => (
@@ -59,6 +66,7 @@ const LoginForm = () => {
           name="password"
           control={control}
         />
+        {state?.error && parseError(state?.message)}
         <Button variant="contained" type="submit">
           Login
         </Button>
