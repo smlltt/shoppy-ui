@@ -8,6 +8,8 @@ export const parseError = (message?: string | string[]) => {
     return <p className="text-red-400 text-xs">{capitalize(message)}</p>;
   }
   return message.map((msg) => (
-    <p className="text-red-400 text-xs">{capitalize(msg)}</p>
+    <p className="text-red-400 text-xs" key={msg}>
+      {capitalize(msg)}
+    </p>
   ));
 };

@@ -4,11 +4,12 @@ import { Button, Stack, TextField, Link, capitalize } from "@mui/material";
 import NextLink from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { LoginFormData } from "../login-form/loginForm";
-import { array, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpAction, State } from "./signUpAction";
-import { useActionState, useEffect } from "react";
+import { signUpAction } from "./signUpAction";
+import { useActionState } from "react";
 import { parseError } from "@/app/util/parseError";
+import { ActionState } from "../models";
 
 export const signUpSchema = z.object({
   email: z.string().email("Invalid email address").min(1, "Email is required"),
@@ -18,7 +19,7 @@ export const signUpSchema = z.object({
 interface SignupFormData extends LoginFormData {}
 
 const SignUpForm = () => {
-  const [state, formAction] = useActionState<State, FormData>(
+  const [state, formAction] = useActionState<ActionState, FormData>(
     signUpAction,
     null
   );
