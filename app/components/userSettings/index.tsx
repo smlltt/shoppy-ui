@@ -9,7 +9,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useAuthStore } from "@/app/auth/auth-state";
 
-const UserSettings = () => {
+interface UserSettingsProps {
+  logout: () => void;
+}
+
+const UserSettings = ({ logout }: UserSettingsProps) => {
   const { authenticated } = useAuthStore();
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -46,7 +50,13 @@ const UserSettings = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
+        <MenuItem
+          key={"logout"}
+          onClick={() => {
+            logout();
+            handleCloseUserMenu();
+          }}
+        >
           <Typography sx={{ textAlign: "center" }}>Logout</Typography>
         </MenuItem>
       </Menu>

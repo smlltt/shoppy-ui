@@ -12,11 +12,19 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import UserSettings from "../userSettings";
-import { openRoutes, privateRoutes } from "@/app/constants/routes";
+import {
+  openRoutes,
+  privatePaths,
+  privateRoutes,
+} from "@/app/constants/routes";
 import NextLink from "next/link";
 import { useAuthStore } from "@/app/auth/auth-state";
 
-function Header() {
+interface HeaderProps {
+  logout: () => void;
+}
+
+function Header({ logout }: HeaderProps) {
   const { authenticated } = useAuthStore();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -43,8 +51,8 @@ function Header() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={NextLink}
+            href={privatePaths.home}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -104,8 +112,8 @@ function Header() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={NextLink}
+            href={privatePaths.home}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -132,7 +140,7 @@ function Header() {
               </Button>
             ))}
           </Box>
-          <UserSettings />
+          <UserSettings logout={logout} />
         </Toolbar>
       </Container>
     </AppBar>

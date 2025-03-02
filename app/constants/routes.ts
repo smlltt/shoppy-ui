@@ -3,4 +3,16 @@ export const openRoutes = [
   { title: "Signup", path: "/auth/signup" },
 ];
 
-export const privateRoutes = [{ title: "Home", path: "/" }];
+export const openPaths = {
+  login: "/auth/login",
+  signup: "/auth/signup",
+};
+
+export const privateRoutes = [
+  { title: "Home", path: "/" },
+  { title: "routing test", path: "test" },
+];
+
+export const privatePaths = {
+  home: "/",
+};
