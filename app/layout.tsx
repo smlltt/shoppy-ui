@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import darkTheme from "./dark.theme";
-import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Container } from "@mui/material";
 import Header from "./components/header";
 import { Providers } from "./providers";
 import { checkAuthentication } from "./auth/check-authentication";
+import { logout } from "./auth/logout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +36,7 @@ export default async function RootLayout({
       >
         <Providers authenticated={authenticated}>
           <CssBaseline />
-          <Header />
+          <Header logout={logout} />
           <Container>{children}</Container>
         </Providers>
       </body>
