@@ -29,7 +29,6 @@ export const post = async (
 
 export const get = async (endpoint: string) => {
   const headers = await getHeaders();
-  console.log({ headers });
   const res = await fetch(endpoint, {
     headers,
   });
