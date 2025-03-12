@@ -5,7 +5,6 @@ import { openRoutes } from "./app/constants/routes";
 
 export async function middleware(request: NextRequest) {
   const authenticated = await checkAuthentication();
-  console.log({ authenticated });
   const pathname = request.nextUrl.pathname;
   const isOpenRoute = openRoutes.some((route) =>
     pathname.startsWith(route.path)
