@@ -22,7 +22,9 @@ export const post = async (
       error: parsedRes.error || "Error",
     };
   }
-  shouldSetCookie && setAuthCookie(res);
+  if (shouldSetCookie) {
+    setAuthCookie(res);
+  }
 
   return { error: "", message: "Success" };
 };

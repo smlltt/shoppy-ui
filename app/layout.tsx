@@ -7,6 +7,7 @@ import Header from "./components/header";
 import { Providers } from "./providers";
 import { checkAuthentication } from "./auth/check-authentication";
 import { logout } from "./auth/logout";
+import CreateProductButton from "./components/createProductButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default async function RootLayout({
           <CssBaseline />
           <Header logout={logout} />
           <Container>{children}</Container>
+          {authenticated && <CreateProductButton />}
         </Providers>
       </body>
     </html>
