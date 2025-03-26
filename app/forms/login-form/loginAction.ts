@@ -1,6 +1,6 @@
 "use server";
 
-import { loginEndpoint, signUpEndpoint } from "@/app/endpoints";
+import { loginEndpoint } from "@/app/endpoints";
 import { post } from "@/app/util/fetch";
 import { redirect } from "next/navigation";
 import { ActionState } from "../models";

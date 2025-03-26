@@ -2,7 +2,7 @@
 import * as React from "react";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import Modal from "../modal";
+import Modal from "@/app/components/modal";
 import ProductForm from "@/app/forms/product-form";
 
 const CreateProductButton = () => {

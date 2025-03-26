@@ -29,10 +29,11 @@ export const post = async (
   return { error: "", message: "Success" };
 };
 
-export const get = async (endpoint: string) => {
+export const get = async <T>(endpoint: string, fetchOptions?: RequestInit) => {
   const headers = await getHeaders();
   const res = await fetch(endpoint, {
     headers,
+    ...fetchOptions,
   });
-  return res.json();
+  return res.json() as Promise<T>;
 };

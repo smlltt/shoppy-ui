@@ -75,7 +75,7 @@ const ProductForm = () => {
               helperText={errors.description?.message}
             />
           )}
-          defaultValue={undefined}
+          defaultValue={0}
           name="price"
           control={control}
         />
