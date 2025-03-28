@@ -13,7 +13,7 @@ const Products: FC<ProductsProps> = async ({ page }) => {
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ height: "80vh", overflow: "scroll" }}>
         {products.data.map((product) => (
           <Grid key={product.id} size={[12, 6, 6, 4]}>
             <Product product={product} />
