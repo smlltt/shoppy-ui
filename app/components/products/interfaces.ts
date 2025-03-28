@@ -3,4 +3,5 @@ export interface IProduct {
   description: string;
   price: number;
   id: number;
+  hasImage: boolean;
 }

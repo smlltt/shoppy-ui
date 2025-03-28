@@ -1,7 +1,7 @@
 "use server";
 
-import { productsEndpoint } from "@/app/endpoints";
-import { post } from "@/app/util/fetch";
+import { productsEndpoint, uploadProductImageEndpoint } from "@/app/endpoints";
+import { getHeaders, post } from "@/app/util/fetch";
 import { redirect } from "next/navigation";
 import { ActionState } from "../models";
 import { revalidateTag } from "next/cache";
@@ -11,7 +11,12 @@ export async function createProductAction(
   data: FormData
 ) {
   const endpoint = productsEndpoint();
-  const { error, message } = await post(endpoint, data);
+  const { error, message, data: product } = await post(endpoint, data);
+  console.log("uploaded product", product);
+  const productImage = data.get("image");
+  if (productImage instanceof File && !error) {
+    await uploadProductImage(product.id, productImage);
+  }
   revalidateTag("products");
   if (error) {
     return {
@@ -20,4 +25,16 @@ export async function createProductAction(
     };
   }
   redirect("/");
+}
+
+export async function uploadProductImage(productId: number, file: File) {
+  console.log("uploadProductImage", { productId, file });
+  const formData = new FormData();
+  formData.append("image", file);
+  const headers = await getHeaders();
+  await fetch(uploadProductImageEndpoint(productId), {
+    body: formData,
+    method: "POST",
+    headers,
+  });
 }

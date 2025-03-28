@@ -1,7 +1,9 @@
 import { cookies } from "next/headers";
 import { setAuthCookie } from "./setAuthCookie";
 
-const getHeaders = async () => ({ Cookie: (await cookies()).toString() });
+export const getHeaders = async () => ({
+  Cookie: (await cookies()).toString(),
+});
 
 export const post = async (
   endpoint: string,
@@ -26,7 +28,7 @@ export const post = async (
     setAuthCookie(res);
   }
 
-  return { error: "", message: "Success" };
+  return { error: "", message: "Success", data: parsedRes };
 };
 
 export const get = async <T>(endpoint: string, fetchOptions?: RequestInit) => {
