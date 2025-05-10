@@ -8,11 +8,9 @@ export const openPaths = {
   signup: "/auth/signup",
 };
 
-export const privateRoutes = [
-  { title: "Home", path: "/" },
-  { title: "routing test", path: "test" },
-];
+export const privateRoutes = [{ title: "Home", path: "/" }];
 
 export const privatePaths = {
   home: "/",
+  productDetails: (slug: string) => `/products/${slug}`,
 };

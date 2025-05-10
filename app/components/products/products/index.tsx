@@ -10,7 +10,6 @@ interface ProductsProps {
 
 const Products: FC<ProductsProps> = async ({ page }) => {
   const products = await getProducts(page ? page - 1 : 0);
-
   return (
     <>
       <Grid container spacing={2} sx={{ height: "80vh", overflow: "scroll" }}>
