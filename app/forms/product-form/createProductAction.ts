@@ -12,7 +12,6 @@ export async function createProductAction(
 ) {
   const endpoint = productsEndpoint();
   const { error, message, data: product } = await post(endpoint, data);
-  console.log("uploaded product", product);
   const productImage = data.get("image");
   if (productImage instanceof File && !error) {
     await uploadProductImage(product.id, productImage);
@@ -28,7 +27,6 @@ export async function createProductAction(
 }
 
 export async function uploadProductImage(productId: number, file: File) {
-  console.log("uploadProductImage", { productId, file });
   const formData = new FormData();
   formData.append("image", file);
   const headers = await getHeaders();

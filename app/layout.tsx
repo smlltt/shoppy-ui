@@ -7,7 +7,6 @@ import Header from "./components/header";
 import { Providers } from "./providers";
 import { checkAuthentication } from "./auth/check-authentication";
 import { logout } from "./auth/logout";
-import CreateProductButton from "./components/products/createProductButton";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = Geist({
@@ -41,7 +40,6 @@ export default async function RootLayout({
           <Header logout={logout} />
           <NuqsAdapter>
             <Container sx={{ pt: authenticated ? 4 : 0 }}>{children}</Container>
-            {authenticated && <CreateProductButton />}
           </NuqsAdapter>
         </Providers>
       </body>

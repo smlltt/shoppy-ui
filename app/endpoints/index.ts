@@ -8,3 +8,4 @@ export const productEndpoint = (id: number) => `${API_URL}/products/${id}`;
 export const uploadProductImageEndpoint = (id: number) =>
   `${API_URL}/products/${id}/image`;
 export const meEndpoint = `${API_URL}/users/me`;
+export const buyProductEndpoint = () => `${API_URL}/checkout/session`;
