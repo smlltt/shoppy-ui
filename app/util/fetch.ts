@@ -7,14 +7,15 @@ export const getHeaders = async () => ({
 
 export const post = async (
   endpoint: string,
-  data: FormData,
+  data: FormData | object,
   shouldSetCookie?: boolean
 ) => {
+  const body = data instanceof FormData ? Object.fromEntries(data) : data;
   const headers = await getHeaders();
   const res = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json", ...headers },
-    body: JSON.stringify(Object.fromEntries(data)),
+    body: JSON.stringify(body),
   });
   const parsedRes = await res?.json();
 
