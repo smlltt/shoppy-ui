@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { IProduct } from "../interfaces";
 import ProductComponent from "./Product.component";
@@ -10,7 +11,7 @@ interface ProductProps {
   product: IProduct;
 }
 
-const Product: FC<ProductProps> = async ({ product }) => {
+const Product: FC<ProductProps> = ({ product }) => {
   return (
     <ProductComponent product={product}>
       {product.hasImage ? (

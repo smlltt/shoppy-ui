@@ -8,7 +8,6 @@ import Image from "next/image";
 import { API_URL } from "@/app/constants/api";
 import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
-import { parseError } from "@/app/util/parseError";
 import checkout from "@/app/checkout/actions/checkout";
 import getStripe from "@/app/checkout/stripe";
 
